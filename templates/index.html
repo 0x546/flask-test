@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Landing page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'bootstrap.min.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+
 <nav class="navbar navbar-light bg-light">
     <span class="navbar-brand mb-0 h1">Super awesome title</span>
 </nav>
@@ -59,5 +57,4 @@
 </div>
 
 <script src="{{ url_for('static', filename = 'bootstrap.bundle.min.js') }}"></script>
-</body>
-</html>
+{% endblock %}

@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>About us</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'bootstrap.min.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+
 <div class="alert alert-success" role="alert">
   <h4 class="alert-heading">Well done!</h4>
   <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
@@ -49,5 +47,4 @@ We know a lot about a lot of things.
 </div>
 
 <script src="{{ url_for('static', filename = 'bootstrap.bundle.min.js') }}"></script>
-</body>
-</html>
+{% endblock %}

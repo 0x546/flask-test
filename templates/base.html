@@ -9,11 +9,29 @@
     <link rel="stylesheet" href="{{ url_for('static', filename = 'bootstrap.min.css') }}">
 </head>
 <body>
-    <!-- Optional Navbar or Header -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">My App</a>
-        <!-- Navbar content -->
-    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark-subtle">
+    <div class="container-fluid justify-content-center">
+        <a class="navbar-brand" href="#">{{ request.path[1:].capitalize() }}</a>
+        <ul class="navbar-nav">
+            {% if request.path != '/home' %}
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            {% endif %}
+            {% if request.path != '/about' %}
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+            {% endif %}
+            {% if request.path != '/test' %}
+            <li class="nav-item">
+                <a class="nav-link" href="/test">Test</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
 
     <div class="container">
         {% block content %}{% endblock %}
