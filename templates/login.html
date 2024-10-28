@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+
+    <div class="container w-75 mt-5">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}
+                  {% if redirect_url %}
+                    <p id="countdown">Redirecting in <span id="countdown-timer">3</span> seconds...</p>
+                  {% endif %}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <h2 class="text-center">Login</h2>
+        <form method="POST" action="{{ url_for('login') }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group w-50 mx-auto">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control", onfocus="clearDefault(this)", onblur="restoreDefault(this, 'user@example.com')") }}
+            </div>
+            <div class="form-group w-50 mx-auto">
+                {{ form.password.label(class="form-label") }}
+                {{ form.password(class="form-control") }}
+            </div>
+            <div class="form-group w-50 p-2 mx-auto text-center">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+        <p class="text-center">Don't have an account? <a href="#">Sign up</a></p>
+    </div>
+    <!-- JavaScript for clearing default on focus -->
+    <script>
+        function clearDefault(input) {
+            if (input.value === input.defaultValue) {
+                input.value = '';  // Clear the default value on focus
+            }
+        }
+        function restoreDefault(input, defaultValue) {
+            if (input.value === '') {
+                input.value = defaultValue;  // Restore the default value on blur if field is empty
+            }
+        }
+    </script>
+
+
+    {% if redirect_url %}
+    <script>
+        // Set initial countdown time in seconds
+        let countdownTime = 3;
+
+        // Display initial countdown time
+        document.getElementById('countdown-timer').textContent = countdownTime;
+
+        // Update countdown every second
+        const countdownInterval = setInterval(function() {
+            countdownTime--;
+            document.getElementById('countdown-timer').textContent = countdownTime;
+
+            // When countdown reaches zero, stop interval and redirect
+            if (countdownTime <= 0) {
+                clearInterval(countdownInterval);
+                window.location.href = "{{ redirect_url }}";
+            }
+        }, 1000);
+    </script>
+    {% endif %}
+
+
+{% endblock %}
